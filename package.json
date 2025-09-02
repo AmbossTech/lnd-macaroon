@@ -1,5 +1,5 @@
 {
-  "name": "@amboss-tech/lnd-macaroon",
+  "name": "@amboss/lnd-macaroon",
   "version": "0.0.1",
   "description": "A simple NPM package which helps decoding LND macaroons",
   "main": "dist/index.js",
