@@ -1,0 +1,24 @@
+{
+  "name": "@amboss-tech/lnd-macaroon",
+  "version": "0.0.1",
+  "description": "A simple NPM package which helps decoding LND macaroons",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "prebuild": "rimraf dist",
+    "postbuild": "copyfiles -f ./src/proto/id* ./dist/proto",
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Amboss Technologies Inc.",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^24.3.0",
+    "copyfiles": "^2.4.1",
+    "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "google-protobuf": "^4.0.0",
+    "macaroon": "^3.0.4"
+  }
+}
