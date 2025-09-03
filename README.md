@@ -2,6 +2,8 @@
 
 #### This NPM package helps decoding macaroons for [LND](https://github.com/lightningnetwork/lnd).
 
+##### Built with help of [guggero/cryptography-toolkit](https://github.com/guggero/cryptography-toolkit)
+
 Currently, this NPM package just consists of 1 function: `getMacaroonOperations`. This function takes in an LND macaroon in hex format and returns an array of entities and actions.
 
 ```typescript
