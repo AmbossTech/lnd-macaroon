@@ -50,7 +50,7 @@ export const getFlatPermissionList = (
 export const verifyMacaroonPermissions = (
   givenPermissions: FlatMacaroonPermission[],
   wantedPermissions: FlatMacaroonPermission[],
-): string[] => {
+): FlatMacaroonPermission[] => {
   const matches = isEqual(givenPermissions, wantedPermissions);
   if (matches) return givenPermissions;
 
