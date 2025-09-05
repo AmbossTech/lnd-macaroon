@@ -4,7 +4,7 @@
 
 ##### Built with help of [guggero/cryptography-toolkit](https://github.com/guggero/cryptography-toolkit)
 
-Currently, this NPM package just consists of 1 function: `getMacaroonOperations`. This function takes in an LND macaroon in hex format and returns an array of entities and actions.
+`getMacaroonOperations` takes in an LND macaroon in hex format and returns an array of entities and actions.
 
 ```typescript
 const permissions = getMacaroonOperations(macaroonHex);
@@ -24,3 +24,5 @@ for (const { entity, actions } of permissions) {
 //   ]
 // }
 ```
+
+`getFlatPermissionList` and `verifyMacaroonPermissions` are helper functions to check the macaroon permissions.
