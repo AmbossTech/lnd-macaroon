@@ -3,8 +3,8 @@ import { difference, isEqual } from 'lodash';
 // @ts-expect-error lib does not support TS
 import { MacaroonId } from './proto/id_pb';
 
-type MacaroonPermission = { entity: string; actions: string[] };
-type FlatMacaroonPermission = `${string}:${string}`;
+export type MacaroonPermission = { entity: string; actions: string[] };
+export type FlatMacaroonPermission = `${string}:${string}`;
 
 export function getMacaroonOperations (
   macaroonHex: string,
