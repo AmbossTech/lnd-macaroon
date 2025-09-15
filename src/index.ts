@@ -54,18 +54,18 @@ export const verifyMacaroonPermissions = (
   const matches = isEqual(givenPermissions, wantedPermissions);
   if (matches) return givenPermissions;
 
+  // Check which permissions are not wanted
+  for (const permission of givenPermissions) {
+    const need = wantedPermissions.includes(permission);
+    if (!need) throw new Error(`Unwanted permission: ${permission}`);
+  }
+
   // Check which permissions are missing
   const missingPermissions = difference(wantedPermissions, givenPermissions);
   if (missingPermissions.length) {
     throw new Error(
       `Macaroon is missing permissions: ${missingPermissions.join(', ')}`,
     );
-  }
-
-  // Check which permissions are not wanted
-  for (const permission of givenPermissions) {
-    const need = wantedPermissions.includes(permission);
-    if (!need) throw new Error(`Unwanted permission: ${permission}`);
   }
 
   console.error(`Unexpected issue during macaroon permissions check`, {
