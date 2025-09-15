@@ -5,6 +5,7 @@ import { MacaroonId } from './proto/id_pb';
 
 export type MacaroonPermission = { entity: string; actions: string[] };
 export type FlatMacaroonPermission = `${string}:${string}`;
+export type PermissionDifference = { missing: FlatMacaroonPermission[], notWanted: FlatMacaroonPermission[] }
 
 export function getMacaroonOperations (
   macaroonHex: string,
@@ -73,4 +74,26 @@ export const verifyMacaroonPermissions = (
     wantedPermissions,
   });
   throw new Error(`Unable to verify macaroon`);
+};
+
+export const getPermissionDifference = (
+  givenPermissions: FlatMacaroonPermission[],
+  wantedPermissions: FlatMacaroonPermission[],
+): PermissionDifference => {
+  const result: PermissionDifference = { missing:[], notWanted:[] };
+
+  const matches = isEqual(givenPermissions, wantedPermissions);
+  if (matches) return result;
+
+  // Check which permissions are not wanted
+  for (const permission of givenPermissions) {
+    const need = wantedPermissions.includes(permission);
+    if (!need) result.notWanted.push(permission);
+  }
+
+  // Check which permissions are missing
+  const missingPermissions = difference(wantedPermissions, givenPermissions);
+  if (missingPermissions.length) result.missing.push(...missingPermissions)
+
+  return result;
 };
