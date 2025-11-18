@@ -1,8 +1,10 @@
 # LND Macaroon Decoder
 
-#### This NPM package helps decoding macaroons for [LND](https://github.com/lightningnetwork/lnd).
+A helper NPM package which decodes [LND](https://github.com/lightningnetwork/lnd) macaroons.
 
-##### Built with help of [guggero/cryptography-toolkit](https://github.com/guggero/cryptography-toolkit)
+Built with the help of [guggero/cryptography-toolkit](https://github.com/guggero/cryptography-toolkit)
+
+## Programmatic usage
 
 `getMacaroonOperations` takes in an LND macaroon in hex format and returns an array of entities and actions.
 
@@ -26,3 +28,13 @@ for (const { entity, actions } of permissions) {
 ```
 
 `getFlatPermissionList` and `verifyMacaroonPermissions` are helper functions to check the macaroon permissions.
+
+## Running the CLI command
+
+Use the NPM script to decode a macaroon:
+
+```bash
+npm run decode <your-macaroon-hex>
+```
+
+Replace `<your-macaroon-hex>` with an actual LND macaroon in hex format.
