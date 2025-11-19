@@ -27,6 +27,23 @@ for (const { entity, actions } of permissions) {
 // }
 ```
 
+`getMacaroonInfo` includes the macaroon's `location` value, which lets you
+distinguish between macaroons from `lnd`, `tapd` and `litd`.
+
+```typescript
+const info = getMacaroonInfo(macaroonHex);
+console.log(info);
+
+// {
+//   location: "lnd",
+//   permissions: [
+//     { entity: 'address', actions: [ 'read' ] },
+//     { entity: 'info', actions: [ 'read' ] },
+//     // ...
+//   ]
+// }
+```
+
 `getFlatPermissionList` and `verifyMacaroonPermissions` are helper functions to check the macaroon permissions.
 
 ## Running the CLI command

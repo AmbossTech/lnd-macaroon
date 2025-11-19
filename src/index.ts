@@ -1,16 +1,28 @@
-const { base64ToBytes, importMacaroon } = require('macaroon');
-import { difference, isEqual } from 'lodash';
+const { base64ToBytes, importMacaroon } = require("macaroon");
+import { difference, isEqual } from "lodash";
 // @ts-expect-error lib does not support TS
-import { MacaroonId } from './proto/id_pb';
+import { MacaroonId } from "./proto/id_pb";
 
 export type MacaroonPermission = { entity: string; actions: string[] };
+export type MacaroonInfo = {
+  location: string;
+  permissions: MacaroonPermission[];
+};
 export type FlatMacaroonPermission = `${string}:${string}`;
-export type PermissionDifference = { missing: FlatMacaroonPermission[], notWanted: FlatMacaroonPermission[] }
+export type PermissionDifference = {
+  missing: FlatMacaroonPermission[];
+  notWanted: FlatMacaroonPermission[];
+};
 
-export function getMacaroonOperations (
+export function getMacaroonOperations(
   macaroonHex: string,
 ): MacaroonPermission[] {
-  const base64 = Buffer.from(macaroonHex, 'hex');
+  const info = getMacaroonInfo(macaroonHex);
+  return info.permissions;
+}
+
+export function getMacaroonInfo(macaroonHex: string): MacaroonInfo {
+  const base64 = Buffer.from(macaroonHex, "hex");
   const mac = importMacaroon(base64);
 
   const macJson = mac.exportJSON();
@@ -21,12 +33,16 @@ export function getMacaroonOperations (
   }
 
   const id = MacaroonId.deserializeBinary(identBytes.subarray(1));
-  return id.getOpsList().map((op: any) => ({
+  const permissions = id.getOpsList().map((op: any) => ({
     entity: op.getEntity(),
     actions: op.getActionsList(),
   }));
-};
 
+  return {
+    location: macJson.l || "",
+    permissions,
+  };
+}
 
 /**
  * @returns `(entity:action)[]`
@@ -65,7 +81,7 @@ export const verifyMacaroonPermissions = (
   const missingPermissions = difference(wantedPermissions, givenPermissions);
   if (missingPermissions.length) {
     throw new Error(
-      `Macaroon is missing permissions: ${missingPermissions.join(', ')}`,
+      `Macaroon is missing permissions: ${missingPermissions.join(", ")}`,
     );
   }
 
@@ -80,7 +96,7 @@ export const getPermissionDifference = (
   givenPermissions: FlatMacaroonPermission[],
   wantedPermissions: FlatMacaroonPermission[],
 ): PermissionDifference => {
-  const result: PermissionDifference = { missing:[], notWanted:[] };
+  const result: PermissionDifference = { missing: [], notWanted: [] };
 
   const matches = isEqual(givenPermissions, wantedPermissions);
   if (matches) return result;
@@ -93,7 +109,7 @@ export const getPermissionDifference = (
 
   // Check which permissions are missing
   const missingPermissions = difference(wantedPermissions, givenPermissions);
-  if (missingPermissions.length) result.missing.push(...missingPermissions)
+  if (missingPermissions.length) result.missing.push(...missingPermissions);
 
   return result;
 };
