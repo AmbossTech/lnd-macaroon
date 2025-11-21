@@ -1,6 +1,6 @@
 {
   "name": "@ambosstech/lnd-macaroon",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A simple NPM package which helps decoding LND macaroons",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
