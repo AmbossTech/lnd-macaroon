@@ -58,7 +58,7 @@ Replace `<your-macaroon-hex>` with an actual LND macaroon in hex format.
 
 ## Automated releases
 
-This repository uses `semantic-release` + GitHub Actions to automate versioning, changelog generation, GitHub releases, and publishing to npm whenever a change is merged into `main`.
+This repository uses [semantic-release](https://github.com/semantic-release/semantic-release) and a GitHub action [workflow](./.github/workflows/release.yml) to automate versioning, changelog generation, GitHub releases, and publishing to [npm](https://www.npmjs.com/) whenever a change is merged into `main`.
 
 ### Commit message rules
 - [semantic-release](https://github.com/semantic-release/semantic-release) infers the next version from commit messages using [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/). Examples:
