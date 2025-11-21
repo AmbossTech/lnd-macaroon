@@ -2,38 +2,40 @@
   "name": "@ambosstech/lnd-macaroon",
   "version": "0.0.5",
   "description": "A simple NPM package which helps decoding LND macaroons",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/AmbossTech/lnd-macaroon.git"
   },
+  "license": "AGPL-3.0-only",
+  "author": "Amboss Technologies Inc.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "prebuild": "rimraf dist",
-    "postbuild": "copyfiles -f ./src/proto/id* ./dist/proto",
     "build": "tsc",
+    "postbuild": "copyfiles -f ./src/proto/id* ./dist/proto",
     "decode": "ts-node src/cli.ts",
-    "release": "semantic-release"
-  },
-  "author": "Amboss Technologies Inc.",
-  "license": "AGPL-3.0-only",
-  "devDependencies": {
-    "@types/lodash": "^4.17.20",
-    "@types/node": "^24.3.0",
-    "copyfiles": "^2.4.1",
-    "rimraf": "^6.0.1",
-    "ts-node": "^10.9.2",
-    "semantic-release": "^25.0.2",
-    "@semantic-release/npm": "^13.1.2",
-    "@semantic-release/git": "^10.0.1",
-    "@semantic-release/github": "^12.0.2",
-    "@semantic-release/commit-analyzer": "^13.0.1",
-    "@semantic-release/release-notes-generator": "^14.1.0",
-    "@semantic-release/changelog": "^6.0.3"
+    "release": "semantic-release",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "google-protobuf": "^4.0.0",
     "lodash": "^4.17.21",
     "macaroon": "^3.0.4"
+  },
+  "devDependencies": {
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/commit-analyzer": "^13.0.1",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^12.0.2",
+    "@semantic-release/npm": "^13.1.2",
+    "@semantic-release/release-notes-generator": "^14.1.0",
+    "@types/lodash": "^4.17.20",
+    "@types/node": "^24.3.0",
+    "copyfiles": "^2.4.1",
+    "rimraf": "^6.0.1",
+    "semantic-release": "^25.0.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
   }
 }
