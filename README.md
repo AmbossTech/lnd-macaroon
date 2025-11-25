@@ -55,3 +55,19 @@ npm run decode <your-macaroon-hex>
 ```
 
 Replace `<your-macaroon-hex>` with an actual LND macaroon in hex format.
+
+## Publishing Methods
+
+There are 2 methods in which this package can be bumped in the [NPM Repository](https://www.npmjs.com/)
+
+### Automatic Publishing (Recommended)
+
+When you update the package version and that change is merged in the `main` branch, the publication happens automatically. You can either manually update the `version` inside `package.json` or use one of these NPM commands for [semantic versioning](https://semver.org/).
+
+```bash
+npm version minor
+
+npm version patch
+
+npm version major
+```

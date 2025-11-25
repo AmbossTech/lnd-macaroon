@@ -1,7 +1,6 @@
 name: Publish to NPM
 
 on:
-  workflow_dispatch:
   push:
     paths:
       - 'package.json'
