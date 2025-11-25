@@ -56,7 +56,7 @@ npm run decode <your-macaroon-hex>
 
 Replace `<your-macaroon-hex>` with an actual LND macaroon in hex format.
 
-## Publishing Methods
+## Publishing Method
 
 When you update the package version and that change is merged in the `main` branch, the publication happens automatically. You can either manually update the `version` inside `package.json` or use one of these NPM commands for [semantic versioning](https://semver.org/).
 
