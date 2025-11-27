@@ -3,12 +3,15 @@ name: Publish to NPM
 on:
   push:
     paths:
-      - 'package.json'
+      - "package.json"
     branches: [main]
 
 jobs:
   publish:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v6.0.0
@@ -19,7 +22,7 @@ jobs:
         uses: actions/setup-node@v6.0.0
         with:
           node-version: 20
-          cache: 'npm'
+          cache: "npm"
 
       - name: Install dependencies
         run: npm ci
@@ -29,5 +32,3 @@ jobs:
 
       - name: Publish to npm
         uses: JS-DevTools/npm-publish@v4
-        with:
-          token: ${{ secrets.NPM_TOKEN }}
